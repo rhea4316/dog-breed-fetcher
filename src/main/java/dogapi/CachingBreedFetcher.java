@@ -26,11 +26,16 @@ public class CachingBreedFetcher implements BreedFetcher {
 
         try {
             List<String> subBreedList = this.fetcher.getSubBreeds(breed);
-            this.callsMade++;
-            this.cache.put(breed, subBreedList);
+            if (!this.cache.containsKey(breed)) {
+                this.callsMade++;
+                this.cache.put(breed, subBreedList);
+            }
             return subBreedList;
 
         } catch (BreedNotFoundException e) {
+            if (!this.cache.containsKey(breed)) {
+                this.callsMade++;
+            }
             throw new BreedNotFoundException(breed);
         }
 

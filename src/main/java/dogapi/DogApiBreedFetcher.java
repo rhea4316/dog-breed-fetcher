@@ -45,8 +45,8 @@ public class DogApiBreedFetcher implements BreedFetcher {
             List<String> subBreedList = new ArrayList<>();
 
             for (int i = 0; i < subBreeds.length(); i++) {
-                JSONObject subBreed = subBreeds.getJSONObject(i);
-                subBreedList.add(subBreed.getString("name"));
+                String subBreed = subBreeds.getString(i);
+                subBreedList.add(subBreed);
             }
             return subBreedList;
 
